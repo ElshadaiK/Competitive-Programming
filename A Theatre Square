@@ -1,0 +1,26 @@
+import math
+def theatre2(n,m,a):
+    count = 0
+    Vrem = m
+    while Vrem > 0:
+        Hrem = n
+        while Hrem > 0:
+            count += 1
+            Hrem -= a
+        Vrem -= a
+    return count
+def theatre3(n,m,a):
+    Hrem = n
+    Vrem = m
+    count = 0
+    count += math.ceil(Hrem/a)
+    count *= math.ceil(Vrem/a)
+    return count
+inp = input()
+x = inp.split()
+print(theatre3(int(x[0]), int(x[1]), int(x[2])))
+
+
+
+    
+        
