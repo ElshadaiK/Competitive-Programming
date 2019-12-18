@@ -1,0 +1,10 @@
+def isEven2(n):
+    for i in range(n-1, 1, -1):
+        if i%2 == 0:
+            if (n-i)%2 == 0:
+                return "YES"
+    return "NO"
+inp = input()
+x = int(inp)
+print(isEven2(x))
+
