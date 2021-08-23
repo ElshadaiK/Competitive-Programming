@@ -1,4 +1,4 @@
-
+# https://www.hackerrank.com/challenges/sock-merchant/problem
 import math
 import os
 import random
