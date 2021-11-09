@@ -1,3 +1,6 @@
+from collections import deque
+
+
 def collector(values, total):
     prefix_sum = [[values[0][0]], [values[1][0]]]
     for i in range(len(values)):
@@ -9,6 +12,27 @@ def collector(values, total):
     
 
 def dfs(values, i, j, prefix_sum):
+    q = deque([(i,j)])
+
+    while(q):
+        i, j = q.popleft()
+
+        if(i == 1 or j == len(values[0])-1):
+            op1 = prefix_sum[0][-1] - prefix_sum[0][j]
+            op2 = prefix_sum[1][j] - values[1][j]
+            res = max(op1, op2)
+            return res
+        
+        op1 = prefix_sum[0][-1] - prefix_sum[0][j]
+        op2 = prefix_sum[1][j]
+        
+        if(op1 > op2):
+            q.append((i, j+1))
+        else:
+            q.append((i, j+1))
+            return dfs(values, i+1, j, prefix_sum)
+
+def dfsR(values, i, j, prefix_sum):
     if(i == 1 or j == len(values[0])-1):
         op1 = prefix_sum[0][-1] - prefix_sum[0][j]
         op2 = prefix_sum[1][j] - values[1][j]
