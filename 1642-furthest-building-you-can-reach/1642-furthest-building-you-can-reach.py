@@ -3,7 +3,9 @@ class Solution:
         idx = 0
         h = []
         while idx < len(heights) - 1:
+            print(ladders, bricks, idx)
             diff = heights[idx + 1] - heights[idx]
+            print(diff)
             if diff <= 0:
                 pass
             elif diff <= bricks:
