@@ -1,24 +1,21 @@
 class Solution:
     def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
-        idx = 0
-        h = []
-        while idx < len(heights) - 1:
-            print(ladders, bricks, idx)
-            diff = heights[idx + 1] - heights[idx]
-            print(diff)
-            if diff <= 0:
-                pass
-            elif diff <= bricks:
-                heapq.heappush(h, -diff)
-                bricks -= diff
-            elif ladders > 0:                
-                heapq.heappush(h, -diff)
-                max_bricks = -heapq.heappop(h)
-                ladders -= 1
-                bricks += max_bricks - diff
-            else:
-                break
-                
-            idx += 1                
-            
-        return idx
+        # don't sort
+        heap = []
+        for i in range(1, len(heights)):
+            diff = heights[i] - heights[i-1]
+            if(diff > 0):
+                if ladders > 0:
+                    ladders -= 1
+                    heapq.heappush(heap, diff)
+                else:
+                    if len(heap) > 0 and heap[0] < diff and heap[0] <= bricks:
+                        heapq.heappush(heap, diff)
+                        minHeight = heapq.heappop(heap)
+                        bricks -= minHeight
+                    elif diff <= bricks:
+                        bricks -= diff
+                    else:
+                        return i-1
+                    
+        return len(heights) -1
